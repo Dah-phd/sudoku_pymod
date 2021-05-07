@@ -1,0 +1,12 @@
+[package]
+name = "sudoku_pymod"
+version = "0.1.0"
+authors = ["Daniel Nikolaev <toolsproed@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "solver"
+crate-type = ["cdylib"]
+
+[dependencies]
+cpython = "*"
