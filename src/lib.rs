@@ -5,7 +5,6 @@ use cpython::{PyList, PyResult, Python, PythonObject, ToPyObject};
 
 fn make_key(py: Python, base: Vec<Vec<i32>>) -> PyResult<PyList> {
     let mut key = base;
-    println!("{:?}", key);
     solve(&mut key);
     let mut py_key = Vec::new();
     for row in key {
@@ -15,8 +14,7 @@ fn make_key(py: Python, base: Vec<Vec<i32>>) -> PyResult<PyList> {
             )))
         }
     }
-    let py_key = PyList::new(py, &vec![]);
-    Ok(py_key)
+    Ok(PyList::new(py, &py_key))
 }
 // backstrack algorithm
 fn solve(mut board: &mut Vec<Vec<i32>>) -> bool {
