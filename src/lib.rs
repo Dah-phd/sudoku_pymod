@@ -43,22 +43,20 @@ fn works(board: &Vec<Vec<i32>>, location: &(usize, usize), value: &i32) -> bool 
         if row[location.1] == *value {
             return false;
         };
-    }
-    let rrow;
-    let rcell;
-    if location.0 < 3 {
-        rrow = vec![0, 1, 2];
-    } else if location.0 < 6 {
-        rrow = vec![3, 4, 5];
-    } else {
-        rrow = vec![6, 7, 8];
     };
-    if location.1 < 3 {
-        rcell = vec![0, 1, 2];
-    } else if location.1 < 6 {
-        rcell = vec![3, 4, 5];
+    let rrow = if location.0 < 3 {
+        0..3
+    } else if location.0 < 6 {
+        3..6
     } else {
-        rcell = vec![6, 7, 8];
+        6..9
+    };
+    let rcell = if location.1 < 3 {
+        0..3
+    } else if location.1 < 6 {
+        3..6
+    } else {
+        6..9
     };
     for rr in rrow {
         for rc in &rcell {
