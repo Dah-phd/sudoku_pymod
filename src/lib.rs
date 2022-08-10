@@ -34,6 +34,15 @@ fn solve(mut board: &mut Vec<Vec<i32>>) -> bool {
     board[location.0 as usize][location.1 as usize] = 0 as i32;
     false
 }
+
+fn get_range_by_location(location:usize) -> std::ops::Range<usize> {
+    match location {
+        loc if loc < 3 => 0..3,
+        loc if loc < 6 => 3..6,
+        _ => 6..9
+    }
+}
+
 // check if works
 fn works(board: &Vec<Vec<i32>>, location: &(usize, usize), value: &i32) -> bool {
     if board[location.0].contains(value) {
@@ -44,22 +53,8 @@ fn works(board: &Vec<Vec<i32>>, location: &(usize, usize), value: &i32) -> bool 
             return false;
         };
     };
-    let rrow = if location.0 < 3 {
-        0..3
-    } else if location.0 < 6 {
-        3..6
-    } else {
-        6..9
-    };
-    let rcell = if location.1 < 3 {
-        0..3
-    } else if location.1 < 6 {
-        3..6
-    } else {
-        6..9
-    };
-    for rr in rrow {
-        for rc in &rcell {
+    for rr in get_range_by_location(location.0) {
+        for rc in get_range_by_location(location.1) {
             if *value == board[rr][*rc] {
                 return false;
             }
